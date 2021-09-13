@@ -6,11 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+    <link rel="stylesheet" href="./style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <title>Document</title>
 </head>
 <body>
-    <div>
-        <canvas id="myChart" width="400" height="400"></canvas>
+    <div class="chart_1">
+        <canvas id="myChart"    width="400" height="400" class="chart1"></canvas>
+    </div>
+    <div class="chart_2">
+        <canvas id="myChart1" width="400" height="400" class="chart2"></canvas>
     </div>
 <script>
     var ctx = document.getElementById('myChart');
@@ -18,10 +23,9 @@
         type: 'bar', 
         // 차트에 타입을 정하기
         data: {
-            labels: ['', '', '', '', '3', '', ''],
+            labels: ['', '', '', '', '', '', ''],
         //x축에 있는 값, 이름을 정하기
         datasets: [{
-            lagel: '# of Votes',
             data: [12, 19, 3, 5, 2, 3],
             backgroundColor: [
             'rgba(255, 99, 132, 0.2)',
@@ -39,7 +43,7 @@
                 'rgba(153, 102, 255, 1)',
                 'rgba(255, 159, 64, 1)'
             ],
-            borderWidth: 1
+            borderWidth: 10
         }]
     },
     option: {
@@ -50,7 +54,55 @@
         }
     }
     });
-    
+
+
+var ctx = document.getElementById('myChart1');
+    var myChart = new Chart(ctx, {
+        type: 'bar', 
+        // 차트에 타입을 정하기
+        data: {
+            labels: ['', '', '', '', '', '', ''],
+        //x축에 있는 값, 이름을 정하기
+        datasets: [{
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+            'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 10
+        }]
+    },
+    option: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+    });
+    const plugin = {
+  id: 'custom_canvas_background_color',
+  beforeDraw: (chart) => {
+    const ctx = chart.canvas.getContext('2d');
+    ctx.save();
+    ctx.globalCompositeOperation = 'destination-over';
+    ctx.fillStyle = 'lightGreen';
+    ctx.fillRect(0, 0, chart.width, chart.height);
+    ctx.restore();
+  }
+};
 </script>
 
 </body>
